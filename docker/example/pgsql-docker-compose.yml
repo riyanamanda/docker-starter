@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+    php-apache:
+        image: php:apache
+        container_name: example-server
+        ports:
+            - 80:80
+        volumes:
+            - './app:/var/www/html/'
+        networks:
+            - example-network
+
+    postgres:
+        image: postgres:latest
+        container_name: example-database
+        environment:
+            - POSTGRES_USER=${PG_USER:?err}
+            - POSTGRES_PASSWORD=${PG_DB_PASSWORD:?err}
+            - POSTGRES_DB=${PG_DB:?err}
+        ports:
+            - '5432:5432'
+        networks:
+            - example-network
+
+    pgadmin:
+        image: dpage/pgadmin4:latest
+        container_name: example-pgadmin
+        environment:
+            - PGADMIN_DEFAULT_EMAIL=${PGA_EMAIL:?err}
+            - PGADMIN_DEFAULT_PASSWORD=${PGA_PASSWORD:?err}
+        ports:
+            - '8080:80'
+        networks:
+            - example-network
+
+networks:
+    example-network:
