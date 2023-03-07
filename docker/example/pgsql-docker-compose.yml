@@ -14,12 +14,14 @@ services:
     postgres:
         image: postgres:latest
         container_name: example-database
+        ports:
+            - '5432:5432'
         environment:
             - POSTGRES_USER=${PG_USER:?err}
             - POSTGRES_PASSWORD=${PG_DB_PASSWORD:?err}
             - POSTGRES_DB=${PG_DB:?err}
-        ports:
-            - '5432:5432'
+        volumes:
+            - './postgresql:/var/lib/postgresql/data'
         networks:
             - example-network
 

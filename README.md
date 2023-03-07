@@ -13,8 +13,6 @@ Change the names of the variables in the <i>.env</i> file according to your appl
 ```
 APP_NAME=example_app
 
-DB_NAME=example_db
-DB_USER=root
 DB_PASSWORD=secret
 ```
 

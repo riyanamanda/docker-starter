@@ -16,7 +16,7 @@ services:
             - example-network
 
     php:
-        image: php:8.1-fpm-alpine
+        image: php:8.1-fpm
         container_name: example-php
         working_dir: '/var/www/html'
         volumes:
@@ -30,6 +30,8 @@ services:
         restart: unless-stopped
         environment:
             MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:?err}
+        volumes:
+            - './mysql:/var/lib/mysql'
         networks:
             - example-network
 
